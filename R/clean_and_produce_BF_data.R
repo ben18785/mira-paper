@@ -1,4 +1,3 @@
-rm(list=ls())
 # devtools::install_github("ben18785/mlgtsmira",
 #                          ref="main",
 #                          auth_token = "xyz") # put your token here
