@@ -2,7 +2,7 @@
 
 ADMINS := $(shell seq 1 13)
 FIGURE_FITS := $(addsuffix .pdf, $(addprefix outputs/fit_plots/fit_res_on_, $(ADMINS)))
-COUNTERFACTUAL_IDS := $(shell seq 1 7)
+COUNTERFACTUAL_IDS := $(shell seq 1 104)
 COUNTERFACTUAL_RUNS := $(addsuffix .rds, $(addprefix outputs/simulations/counterfactual_, $(COUNTERFACTUAL_IDS)))
 # $(info VAR="$(COUNTERFACTUAL)")
 
@@ -12,7 +12,9 @@ all: data/processed/m_fits_all.rds\
 		 $(FIGURE_FITS)\
 		 data/processed/counterfactual_params.rds\
 		 $(COUNTERFACTUAL_RUNS)\
-		 outputs/simulations/counterfactual_all_simulations.rds
+		 outputs/simulations/counterfactual_all_simulations.rds\
+		 outputs/counterfactual_plots/scenarios.pdf\
+		 outputs/counterfactual_plots/interventions.pdf
 
 data/processed/input_bf_only.rds: R/clean_and_produce_BF_data.R data/raw/input.RData data/raw/clinical.rds data/raw/subnational_resistance.rds 
 	Rscript $<
@@ -20,8 +22,8 @@ data/processed/input_bf_only.rds: R/clean_and_produce_BF_data.R data/raw/input.R
 data/processed/m_fits_on.rds: R/fit_m_resistance_on.R data/raw/monthly_prevalence.rds data/processed/input_bf_only.rds
 	Rscript $<
 	
-data/processed/m_fits_off.rds: data/raw/monthly_prevalence.rds data/processed/input_bf_only.rds R/fit_m_resistance_off.R
-	Rscript R/fit_m_resistance_off.R
+data/processed/m_fits_off.rds: R/fit_m_resistance_off.R data/raw/monthly_prevalence.rds data/processed/input_bf_only.rds
+	Rscript $<
 	
 data/processed/m_fits_cascades_olyset.rds: R/fit_m_cascades_olyset.R data/raw/prevalence_olyset_mira.rds data/processed/input_bf_only.rds data/raw/itn.rds
 	Rscript $<
@@ -43,4 +45,10 @@ $(COUNTERFACTUAL_RUNS): outputs/simulations/counterfactual_%.rds: R/counterfactu
 	Rscript $< $*
 
 outputs/simulations/counterfactual_all_simulations.rds: R/counterfactual_simulations_process.R $(COUNTERFACTUAL_RUNS)
+	Rscript $<
+	
+outputs/counterfactual_plots/scenarios.pdf: R/plot_counterfactuals.R outputs/simulations/counterfactual_all_simulations.rds
+	Rscript $<
+
+outputs/counterfactual_plots/interventions.pdf: R/plot_interventions.R data/processed/input_bf_only.rds
 	Rscript $<

@@ -17,6 +17,7 @@ itn_scenario <- counterfactual_params$itn
 smc_scenario <- counterfactual_params$smc
 biting_scenario <- counterfactual_params$biting
 resistance_scenario <- counterfactual_params$resistance
+act_scenario <- counterfactual_params$act
 a_NAME_1 <- counterfactual_params$NAME_1
 
 annual <- readRDS("data/raw/monthly_prevalence.rds") %>%
@@ -57,6 +58,13 @@ if (smc_scenario == 0) {
   a <- a %>%
     mutate(smc = 0)
 } 
+
+# act scenarios
+if(act_scenario == 0) {
+  a <- a %>%
+    mutate(prop_act = 0)
+}
+
 a_df <- a_df %>%
   mutate(interventions=list(a))
 
@@ -75,7 +83,10 @@ if(biting_scenario == 0) {
   a_vectors <- a_df$vectors[[1]] %>%
     mutate(gamb_ss_Q_in=0.875,
            fun_Q_in=0.875,
-           arab_Q_in=0.875)
+           arab_Q_in=0.875) %>% 
+    mutate(gamb_ss_Q_bed=0.875,
+           fun_Q_bed=0.875,
+           arab_Q_bed=0.875)
   a_df <- a_df %>%
     mutate(vectors=list(a_vectors))
 }
