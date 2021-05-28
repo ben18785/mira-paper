@@ -237,3 +237,40 @@ f_run_model_longer <- function(total_M, Continent, ISO, NAME_0, NAME_1, NAME_2, 
   return(temp)
 }
 
+f_run_model_now <- function(total_M, Continent, ISO, NAME_0, NAME_1, NAME_2, ur, vectors, demog, pop,
+                               interventions, seasonality, resistance, target,
+                               param_a=0.89, param_b=0.47, num_runs=3, num_people=10000,
+                               beta_1=-1.431, beta_2=5.603, lower_smc_age,
+                               upper_smc_age){
+  # Interventions
+  itn <- mlgts:::itn_flexible_input(0:20, interventions$llin, num_runs = num_runs)
+  irs <- mlgts::irs_flexible_input(0:20, interventions$irs)
+  smc <- mlgts::smc_flexible_input2(0:20, interventions$smc, interventions$smc_rounds,
+                                    interventions$lower_smc_age, interventions$upper_smc_age)
+  tx <- mlgts::treat_flexible_input(0:20, interventions$tx * (1 - interventions$prop_act), interventions$tx * interventions$prop_act, rep(0, 19), rep(0, 19))
+  rtss <- mlgts::epi_pev_flexible_input(0:20, interventions$rtss)
+  
+  # LLIN resistance params
+  lparam <- mlgts::itn_resistance_flexible_input(interventions$year - 2000,
+                                                 resistance$resistance[1:21],
+                                                 interventions$net_type,
+                                                 param_a,
+                                                 param_b,
+                                                 beta_1, beta_2)
+  
+  # IRS resistance params
+  iparam <- mlgts:::irs_resistance_flexible_input(interventions$year - 2000,
+                                                  resistance$resistance[1:21],
+                                                  interventions$irs_compound)
+  
+  options = paste(paste0("num_people ", num_people, " final_run 21 itn_usage 1 num_runs ", num_runs), "add", itn, irs, smc, tx, rtss,
+                  mlgts::bionomics_string(vectors), lparam, iparam)
+  
+  site <- mlgts::site_create(vectors, seasonality)
+  
+  options <- paste(paste("total_M", total_M, sep = ' '), options, sep = ' ')
+  temp <- suppressMessages(launch(name = 'Fitting_output',
+                                  options = options,
+                                  site = site, demog = demog, pop = pop))
+  return(temp)
+}

@@ -39,5 +39,5 @@ outputs <- temp[[1]]$output
 g <- f_plot_specific_simple("Cascades", outputs, annual) +
   ggtitle("Cascades")
 
-ggsave(paste0("outputs/fit_plots/fit_res_on_cascades_inc_olyset.pdf"),
+ggsave(paste0("outputs/fit_plots/fit_res_on_Cascades_inc_olyset.pdf"),
        g, width = 10, height = 6)
