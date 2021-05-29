@@ -1,0 +1,415 @@
+﻿country,year,cases
+Algeria,2010,1
+Algeria,2011,1
+Algeria,2012,55
+Algeria,2013,8
+Algeria,2014,0
+Algeria,2015,0
+Algeria,2016,0
+Algeria,2017,0
+Algeria,2018,0
+Angola,2010,4332945
+Angola,2011,4262568
+Angola,2012,4379690
+Angola,2013,4706326
+Angola,2014,5063524
+Angola,2015,5576653
+Angola,2016,6345114
+Angola,2017,6825325
+Angola,2018,7052636
+Benin,2010,3567057
+Benin,2011,3501513
+Benin,2012,3677978
+Benin,2013,3951788
+Benin,2014,4106892
+Benin,2015,4355431
+Benin,2016,4583409
+Benin,2017,4465137
+Benin,2018,4435318
+Botswana,2010,2229
+Botswana,2011,682
+Botswana,2012,304
+Botswana,2013,729
+Botswana,2014,2075
+Botswana,2015,521
+Botswana,2016,1154
+Botswana,2017,2999
+Botswana,2018,879
+Burkina Faso,2010,8602187
+Burkina Faso,2011,8677204
+Burkina Faso,2012,8742005
+Burkina Faso,2013,8323401
+Burkina Faso,2014,7668618
+Burkina Faso,2015,7245827
+Burkina Faso,2016,7490818
+Burkina Faso,2017,7676215
+Burkina Faso,2018,7875575
+Burundi,2010,1823594
+Burundi,2011,1649646
+Burundi,2012,1423214
+Burundi,2013,1341256
+Burundi,2014,1393043
+Burundi,2015,1681495
+Burundi,2016,2367597
+Burundi,2017,2709703
+Burundi,2018,2796890
+Cameroon,2010,6011372
+Cameroon,2011,5542323
+Cameroon,2012,5266733
+Cameroon,2013,5365639
+Cameroon,2014,5536236
+Cameroon,2015,5929407
+Cameroon,2016,6324089
+Cameroon,2017,6441846
+Cameroon,2018,6228154
+Central African Republic,2010,1906095
+Central African Republic,2011,1852888
+Central African Republic,2012,1832621
+Central African Republic,2013,1809535
+Central African Republic,2014,1754603
+Central African Republic,2015,1707013
+Central African Republic,2016,1642736
+Central African Republic,2017,1596323
+Central African Republic,2018,1620758
+Chad,2010,2670920
+Chad,2011,2573306
+Chad,2012,2469991
+Chad,2013,2345147
+Chad,2014,2301093
+Chad,2015,2334698
+Chad,2016,2447429
+Chad,2017,2559078
+Chad,2018,2523288
+Republic of Congo,2010,944174
+Republic of Congo,2011,986118
+Republic of Congo,2012,1013105
+Republic of Congo,2013,1068018
+Republic of Congo,2014,1098243
+Republic of Congo,2015,1100944
+Republic of Congo,2016,1162467
+Republic of Congo,2017,1229822
+Republic of Congo,2018,1232815
+Cote d'Ivoire,2010,9635484
+Cote d'Ivoire,2011,9296942
+Cote d'Ivoire,2012,8538623
+Cote d'Ivoire,2013,7484764
+Cote d'Ivoire,2014,7135696
+Cote d'Ivoire,2015,7433189
+Cote d'Ivoire,2016,8448875
+Cote d'Ivoire,2017,8855281
+Cote d'Ivoire,2018,8287840
+Democratic Republic of Congo,2010,27653200
+Democratic Republic of Congo,2011,26674386
+Democratic Republic of Congo,2012,25054526
+Democratic Republic of Congo,2013,23378784
+Democratic Republic of Congo,2014,22748873
+Democratic Republic of Congo,2015,23546242
+Democratic Republic of Congo,2016,25430848
+Democratic Republic of Congo,2017,26790666
+Democratic Republic of Congo,2018,26888424
+Equatorial Guinea,2010,320824
+Equatorial Guinea,2011,337903
+Equatorial Guinea,2012,368909
+Equatorial Guinea,2013,393693
+Equatorial Guinea,2014,405084
+Equatorial Guinea,2015,396704
+Equatorial Guinea,2016,373026
+Equatorial Guinea,2017,360585
+Equatorial Guinea,2018,352124
+Eritrea,2010,83471
+Eritrea,2011,76678
+Eritrea,2012,52483
+Eritrea,2013,49309
+Eritrea,2014,109689
+Eritrea,2015,64176
+Eritrea,2016,86561
+Eritrea,2017,115928
+Eritrea,2018,99716
+Eswatini,2010,268
+Eswatini,2011,549
+Eswatini,2012,562
+Eswatini,2013,962
+Eswatini,2014,711
+Eswatini,2015,157
+Eswatini,2016,350
+Eswatini,2017,724
+Eswatini,2018,268
+Ethiopia,2010,7652137
+Ethiopia,2011,7118302
+Ethiopia,2012,7326062
+Ethiopia,2013,7238627
+Ethiopia,2014,3809119
+Ethiopia,2015,3618580
+Ethiopia,2016,2917544
+Ethiopia,2017,2658314
+Ethiopia,2018,2362979
+Gabon,2010,288810
+Gabon,2011,358358
+Gabon,2012,429606
+Gabon,2013,495758
+Gabon,2014,538273
+Gabon,2015,553999
+Gabon,2016,543480
+Gabon,2017,524958
+Gabon,2018,526060
+Gambia,2010,518727
+Gambia,2011,475455
+Gambia,2012,523533
+Gambia,2013,465386
+Gambia,2014,287463
+Gambia,2015,406835
+Gambia,2016,250439
+Gambia,2017,117383
+Gambia,2018,150480
+Ghana,2010,9023507
+Ghana,2011,9635269
+Ghana,2012,9730304
+Ghana,2013,9293452
+Ghana,2014,8596537
+Ghana,2015,7719431
+Ghana,2016,6721686
+Ghana,2017,6190041
+Ghana,2018,6678000
+Guinea,2010,4226309
+Guinea,2011,4448442
+Guinea,2012,4556901
+Guinea,2013,4445128
+Guinea,2014,4249538
+Guinea,2015,4077155
+Guinea,2016,3890993
+Guinea,2017,3759396
+Guinea,2018,3524261
+Guinea-Bissau,2010,204588
+Guinea-Bissau,2011,219683
+Guinea-Bissau,2012,206635
+Guinea-Bissau,2013,186899
+Guinea-Bissau,2014,158919
+Guinea-Bissau,2015,138573
+Guinea-Bissau,2016,127177
+Guinea-Bissau,2017,143200
+Guinea-Bissau,2018,231124
+Kenya,2010,2845913
+Kenya,2011,2930265
+Kenya,2012,3252855
+Kenya,2013,3754660
+Kenya,2014,3916556
+Kenya,2015,3455175
+Kenya,2016,3452117
+Kenya,2017,3520384
+Kenya,2018,3602498
+Liberia,2010,1345523
+Liberia,2011,1327415
+Liberia,2012,1273383
+Liberia,2013,1347912
+Liberia,2014,1471653
+Liberia,2015,1551740
+Liberia,2016,1771898
+Liberia,2017,1886107
+Liberia,2018,1742079
+Madagascar,2010,893540
+Madagascar,2011,794810
+Madagascar,2012,1594592
+Madagascar,2013,1497292
+Madagascar,2014,1079845
+Madagascar,2015,2358382
+Madagascar,2016,1408502
+Madagascar,2017,1934794
+Madagascar,2018,2163930
+Malawi,2010,5612558
+Malawi,2011,5427890
+Malawi,2012,4834579
+Malawi,2013,4242633
+Malawi,2014,3860686
+Malawi,2015,3634338
+Malawi,2016,3624533
+Malawi,2017,3821420
+Malawi,2018,3876121
+Mali,2010,5772983
+Mali,2011,6279267
+Mali,2012,6961475
+Mali,2013,7448756
+Mali,2014,7468113
+Mali,2015,6833022
+Mali,2016,6902717
+Mali,2017,7160192
+Mali,2018,7378847
+Mauritania,2010,135686
+Mauritania,2011,171207
+Mauritania,2012,105342
+Mauritania,2013,126803
+Mauritania,2014,193411
+Mauritania,2015,249288
+Mauritania,2016,297696
+Mauritania,2017,237631
+Mauritania,2018,173555
+Mozambique,2010,9375217
+Mozambique,2011,9431228
+Mozambique,2012,9492059
+Mozambique,2013,9635885
+Mozambique,2014,9590106
+Mozambique,2015,9623584
+Mozambique,2016,9596334
+Mozambique,2017,9350958
+Mozambique,2018,9006864
+Namibia,2010,2590
+Namibia,2011,3654
+Namibia,2012,5861
+Namibia,2013,8068
+Namibia,2014,26144
+Namibia,2015,19990
+Namibia,2016,41397
+Namibia,2017,89155
+Namibia,2018,51898
+Niger,2010,7007707
+Niger,2011,7323097
+Niger,2012,7660985
+Niger,2013,7780901
+Niger,2014,7700900
+Niger,2015,7397212
+Niger,2016,7457829
+Niger,2017,7702777
+Niger,2018,8002454
+Nigeria,2010,63227343
+Nigeria,2011,60654202
+Nigeria,2012,58151864
+Nigeria,2013,56451623
+Nigeria,2014,55462568
+Nigeria,2015,53631431
+Nigeria,2016,52324868
+Nigeria,2017,54029359
+Nigeria,2018,57184148
+Rwanda,2010,1268118
+Rwanda,2011,404386
+Rwanda,2012,753855
+Rwanda,2013,1313059
+Rwanda,2014,2436249
+Rwanda,2015,3887798
+Rwanda,2016,6832535
+Rwanda,2017,6449821
+Rwanda,2018,5984752
+Senegal,2010,751511
+Senegal,2011,650480
+Senegal,2012,762806
+Senegal,2013,935859
+Senegal,2014,560097
+Senegal,2015,1017535
+Senegal,2016,684544
+Senegal,2017,807277
+Senegal,2018,883919
+Sierra Leone,2010,2943081
+Sierra Leone,2011,2977428
+Sierra Leone,2012,3003669
+Sierra Leone,2013,2970027
+Sierra Leone,2014,2872180
+Sierra Leone,2015,2895435
+Sierra Leone,2016,2868006
+Sierra Leone,2017,2726766
+Sierra Leone,2018,2451110
+South Africa,2010,8060
+South Africa,2011,9866
+South Africa,2012,6621
+South Africa,2013,8645
+South Africa,2014,11705
+South Africa,2015,1157
+South Africa,2016,4323
+South Africa,2017,22517
+South Africa,2018,9540
+South Sudan,2010,2319793
+South Sudan,2011,2318780
+South Sudan,2012,2353290
+South Sudan,2013,2427031
+South Sudan,2014,2492468
+South Sudan,2015,2575568
+South Sudan,2016,2649109
+South Sudan,2017,2681845
+South Sudan,2018,2589443
+Togo,2010,1983506
+Togo,2011,2067173
+Togo,2012,2368811
+Togo,2013,2680257
+Togo,2014,2745866
+Togo,2015,2667930
+Togo,2016,2439684
+Togo,2017,2141714
+Togo,2018,2108823
+Uganda,2010,13533746
+Uganda,2011,12912102
+Uganda,2012,11465552
+Uganda,2013,9074826
+Uganda,2014,8143369
+Uganda,2015,9025492
+Uganda,2016,12069689
+Uganda,2017,13863230
+Uganda,2018,12356577
+Tanzania,2010,6450494
+Tanzania,2011,6050835
+Tanzania,2012,5469691
+Tanzania,2013,5419407
+Tanzania,2014,5942515
+Tanzania,2015,6267687
+Tanzania,2016,6555045
+Tanzania,2017,6775567
+Tanzania,2018,6997809
+Zambia,2010,2408568
+Zambia,2011,2618128
+Zambia,2012,2937598
+Zambia,2013,3369958
+Zambia,2014,3433829
+Zambia,2015,3216354
+Zambia,2016,2968175
+Zambia,2017,2697352
+Zambia,2018,2719036
+Zimbabwe,2010,1094108
+Zimbabwe,2011,717620
+Zimbabwe,2012,590910
+Zimbabwe,2013,861512
+Zimbabwe,2014,1090113
+Zimbabwe,2015,1062200
+Zimbabwe,2016,726722
+Zimbabwe,2017,1216876
+Zimbabwe,2018,579888
+Djibouti,2010,1010
+Djibouti,2011,2189
+Djibouti,2012,2153
+Djibouti,2013,1684
+Djibouti,2014,9439
+Djibouti,2015,9473
+Djibouti,2016,13804
+Djibouti,2017,14671
+Djibouti,2018,25319
+Somalia,2010,356323
+Somalia,2011,301405
+Somalia,2012,310864
+Somalia,2013,366378
+Somalia,2014,430886
+Somalia,2015,514253
+Somalia,2016,528591
+Somalia,2017,541768
+Somalia,2018,514396
+Cape Verde,2010,47
+Cape Verde,2011,7
+Cape Verde,2012,1
+Cape Verde,2013,22
+Cape Verde,2014,26
+Cape Verde,2015,7
+Cape Verde,2016,48
+Cape Verde,2017,423
+Cape Verde,2018,2
+Sao Tome and Principe,2010,2740
+Sao Tome and Principe,2011,8442
+Sao Tome and Principe,2012,10701
+Sao Tome and Principe,2013,9243
+Sao Tome and Principe,2014,1754
+Sao Tome and Principe,2015,2058
+Sao Tome and Principe,2016,2238
+Sao Tome and Principe,2017,2239
+Sao Tome and Principe,2018,2937
+Sudan,2010,1059304
+Sudan,2011,1059374
+Sudan,2012,1091647
+Sudan,2013,1166089
+Sudan,2014,1267868
+Sudan,2015,1395818
+Sudan,2016,1662933
+Sudan,2017,1908105
+Sudan,2018,1954302

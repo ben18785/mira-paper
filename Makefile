@@ -14,7 +14,12 @@ all: data/processed/m_fits_all.rds\
 		 $(COUNTERFACTUAL_RUNS)\
 		 outputs/simulations/counterfactual_all_simulations.rds\
 		 outputs/counterfactual_plots/scenarios.pdf\
-		 outputs/counterfactual_plots/interventions.pdf
+		 outputs/counterfactual_plots/interventions.pdf\
+		 outputs/counterfactual_plots/cases_absolute.pdf\
+		 outputs/counterfactual_plots/cases_percentage.pdf\
+		 outputs/counterfactual_plots/cases_admin1_percentage.pdf
+		 
+		 
 
 data/processed/input_bf_only.rds: R/clean_and_produce_BF_data.R data/raw/input.RData data/raw/clinical.rds data/raw/subnational_resistance.rds 
 	Rscript $<
@@ -52,3 +57,9 @@ outputs/counterfactual_plots/scenarios.pdf: R/plot_counterfactuals.R outputs/sim
 
 outputs/counterfactual_plots/interventions.pdf: R/plot_interventions.R data/processed/input_bf_only.rds
 	Rscript $<
+	
+outputs/counterfactual_plots/cases_absolute.pdf: R/counterfactual_cases.R outputs/simulations/counterfactual_all_simulations.rds data/raw/population_projections.RData data/raw/wmr_cases_2010_2018.csv
+	Rscript $<
+
+outputs/counterfactual_plots/cases_percentage.pdf: outputs/counterfactual_plots/cases_absolute.pdf
+outputs/counterfactual_plots/cases_admin1_percentage.pdf: outputs/counterfactual_plots/cases_percentage.pdf
