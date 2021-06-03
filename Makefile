@@ -4,6 +4,8 @@ ADMINS := $(shell seq 1 13)
 FIGURE_FITS := $(addsuffix .pdf, $(addprefix outputs/fit_plots/fit_res_on_, $(ADMINS)))
 COUNTERFACTUAL_IDS := $(shell seq 1 104)
 COUNTERFACTUAL_RUNS := $(addsuffix .rds, $(addprefix outputs/simulations/counterfactual_, $(COUNTERFACTUAL_IDS)))
+PROJECTION_IDS := $(shell seq 1 130)
+PROJECTION_RUNS := $(addsuffix .rds, $(addprefix outputs/simulations/projection_, $(PROJECTION_IDS)))
 # $(info VAR="$(COUNTERFACTUAL)")
 
 all: data/processed/m_fits_all.rds\
@@ -17,8 +19,11 @@ all: data/processed/m_fits_all.rds\
 		 outputs/counterfactual_plots/interventions.pdf\
 		 outputs/counterfactual_plots/cases_absolute.pdf\
 		 outputs/counterfactual_plots/cases_percentage.pdf\
-		 outputs/counterfactual_plots/cases_admin1_percentage.pdf
-		 
+		 outputs/counterfactual_plots/cases_admin1_percentage.pdf\
+		 data/processed/projection_params.rds\
+		 $(PROJECTION_RUNS)\
+		 outputs/simulations/projection_all_simulations.rds\
+		 outputs/projection_plots/scenarios.pdf
 		 
 
 data/processed/input_bf_only.rds: R/clean_and_produce_BF_data.R data/raw/input.RData data/raw/clinical.rds data/raw/subnational_resistance.rds 
@@ -63,3 +68,15 @@ outputs/counterfactual_plots/cases_absolute.pdf: R/counterfactual_cases.R output
 
 outputs/counterfactual_plots/cases_percentage.pdf: outputs/counterfactual_plots/cases_absolute.pdf
 outputs/counterfactual_plots/cases_admin1_percentage.pdf: outputs/counterfactual_plots/cases_percentage.pdf
+
+data/processed/projection_params.rds: R/projection_parameter_sets.R data/processed/input_bf_only.rds
+	Rscript $<
+
+$(PROJECTION_RUNS): outputs/simulations/projection_%.rds: R/projection.R data/processed/projection_params.rds
+	Rscript $< $*
+	
+outputs/simulations/projection_all_simulations.rds: R/projection_simulations_process.R $(PROJECTION_RUNS)
+	Rscript $<
+
+outputs/projection_plots/scenarios.pdf: R/plot_projections.R outputs/simulations/projection_all_simulations.rds
+	Rscript $<
