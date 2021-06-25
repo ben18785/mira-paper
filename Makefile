@@ -23,7 +23,10 @@ all: data/processed/m_fits_all.rds\
 		 data/processed/projection_params.rds\
 		 $(PROJECTION_RUNS)\
 		 outputs/simulations/projection_all_simulations.rds\
-		 outputs/projection_plots/scenarios.pdf
+		 outputs/projection_plots/scenarios.pdf\
+		 outputs/counterfactual_plots/age_prevalence_cascades.pdf\
+		 outputs/data/processed/cascades_actual_fitted_age_prevalence.rds
+		 
 		 
 
 data/processed/input_bf_only.rds: R/clean_and_produce_BF_data.R data/raw/input.RData data/raw/clinical.rds data/raw/subnational_resistance.rds 
@@ -47,6 +50,9 @@ $(FIGURE_FITS): outputs/fit_plots/fit_res_on_%.pdf: R/plot_fits_non_cascades.R d
 	
 outputs/fit_plots/fit_res_on_cascades_inc_olyset.pdf: R/plot_fits_cascades.R data/raw/monthly_prevalence.rds data/raw/prevalence_olyset_mira.rds data/processed/input_bf_only.rds data/processed/m_fits_all.rds
 	Rscript $<
+
+data/processed/cascades_fit_prevalence_1.rds: outputs/fit_plots/fit_res_on_cascades_inc_olyset.pdf
+data/processed/cascades_fit_prevalence_2.rds: outputs/fit_plots/fit_res_on_cascades_inc_olyset.pdf
 	
 data/processed/counterfactual_params.rds: R/counterfactual_parameter_sets.R data/processed/input_bf_only.rds
 	Rscript $<
@@ -63,11 +69,19 @@ outputs/counterfactual_plots/scenarios.pdf: R/plot_counterfactuals.R outputs/sim
 outputs/counterfactual_plots/interventions.pdf: R/plot_interventions.R data/processed/input_bf_only.rds
 	Rscript $<
 	
+data/processed/intervention_coverages_whole_burkina.rds: outputs/counterfactual_plots/interventions.pdf
+	
 outputs/counterfactual_plots/cases_absolute.pdf: R/counterfactual_cases.R outputs/simulations/counterfactual_all_simulations.rds data/raw/population_projections.RData data/raw/wmr_cases_2010_2018.csv
 	Rscript $<
 
 outputs/counterfactual_plots/cases_percentage.pdf: outputs/counterfactual_plots/cases_absolute.pdf
 outputs/counterfactual_plots/cases_admin1_percentage.pdf: outputs/counterfactual_plots/cases_percentage.pdf
+outputs/simulations/counterfactual_cases_absolute.rds: outputs/counterfactual_plots/cases_percentage.pdf
+
+outputs/counterfactual_plots/age_prevalence_cascades.pdf: R/plot_age_dependent_prevalence_cascades.R data/raw/prevalence_age_cascades.rds outputs/simulations/counterfactual_all_simulations.rds
+	Rscript $<
+
+outputs/data/processed/cascades_actual_fitted_age_prevalence.rds: outputs/counterfactual_plots/age_prevalence_cascades.pdf
 
 data/processed/projection_params.rds: R/projection_parameter_sets.R data/processed/input_bf_only.rds
 	Rscript $<

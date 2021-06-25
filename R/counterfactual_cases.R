@@ -98,9 +98,10 @@ g <- total_df %>%
 ggsave("outputs/counterfactual_plots/cases_percentage.pdf",
        g)
 
-g <- total_df %>% 
+temp_df <- total_df %>% 
   filter(scenario != "current") %>% 
-  mutate(cases=(cases-current)/1e6) %>% 
+  mutate(cases=(cases-current)/1e6)
+g <- temp_df %>% 
   ggplot(aes(x=fct_reorder(scenario, percentage_diff),
              y=cases)) +
   geom_col() +
@@ -108,5 +109,7 @@ g <- total_df %>%
   ylab("Cases, millions") +
   scale_y_continuous() +
   coord_flip()
+saveRDS(temp_df, "outputs/simulations/counterfactual_cases_absolute.rds")
+
 ggsave("outputs/counterfactual_plots/cases_absolute.pdf",
        g)
