@@ -25,9 +25,8 @@ all: data/processed/m_fits_all.rds\
 		 outputs/simulations/projection_all_simulations.rds\
 		 outputs/projection_plots/scenarios.pdf\
 		 outputs/counterfactual_plots/age_prevalence_cascades.pdf\
-		 outputs/data/processed/cascades_actual_fitted_age_prevalence.rds
-		 
-		 
+		 outputs/data/processed/cascades_actual_fitted_age_prevalence.rds\
+		 outputs/counterfactual_plots/map_vs_old_itn.pdf
 
 data/processed/input_bf_only.rds: R/clean_and_produce_BF_data.R data/raw/input.RData data/raw/clinical.rds data/raw/subnational_resistance.rds 
 	Rscript $<
@@ -93,4 +92,13 @@ outputs/simulations/projection_all_simulations.rds: R/projection_simulations_pro
 	Rscript $<
 
 outputs/projection_plots/scenarios.pdf: R/plot_projections.R outputs/simulations/projection_all_simulations.rds
+	Rscript $<
+
+data/processed/compare_map_old_itns.rds: R/compare_map_itn.R\
+	data/raw/SSA_ITN_use_adm1.csv\
+	data/processed/input_bf_only.rds
+	Rscript $<
+
+outputs/counterfactual_plots/map_vs_old_itn.pdf: R/plot_map_itn.R\
+	data/processed/compare_map_old_itns.rds
 	Rscript $<
