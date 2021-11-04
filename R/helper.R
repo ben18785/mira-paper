@@ -151,3 +151,47 @@ f_plot_specific_simple <- function(NAME_1, outputs, annual){
           title = element_text(colour="black", size=16),
           legend.text = element_text(colour="black", size=14))
 }
+
+remove_post_2018_interventions <- function(df_input) {
+  df_int <- df_input$interventions[[1]] %>% 
+    filter(year <= 2018)
+  df_input$interventions[[1]] <- df_int
+  df_input
+}
+
+
+fit_all_m <- function(resistance_off, temp_mean, temp_lower, temp_upper,
+                  num_people=20000) {
+  m_results <- matrix(nrow = nrow(temp_mean) * 3,
+                      ncol = 4)
+  k <- 1
+  itn_level <- c("mean", "lower", "upper")
+  for(j in seq(1, 3, 1)) {
+    if(j == 1) {
+      temp_input <- temp_mean
+    }else if(j == 2) {
+      temp_input <- temp_lower
+    } else {
+      temp_input <- temp_upper
+    }
+    for(i in 1:1) {
+      temp <- temp_input[i, ]
+      
+      # remove all interventions > 2018
+      temp <- remove_post_2018_interventions(temp)
+      
+      if(resistance_off) {
+        res <- temp$resistance[[1]]
+        res$resistance <- 0
+        temp$resistance[[i]] <- res
+      }
+      
+      print(temp$NAME_1)
+      test <- f_find_m(temp$NAME_1, annual, temp, num_people)
+      m_results[k, ] <- c(temp$NAME_1, itn_level[j], test$m, -test$log_likelihood_negative)
+    }
+  }
+  colnames(m_results) <- c("NAME_1", "itn_scenario", "m", "log_likelihood")
+  m_results <- as.data.frame(m_results)
+  m_results
+}

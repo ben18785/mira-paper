@@ -19,10 +19,11 @@ annual <- readRDS("data/raw/prevalence_olyset_mira.rds") %>%
          age_range_r="0-5") %>% 
   mutate(adminLevel1="Cascades")
 
-temp_input <- readRDS("data/processed/input_bf_only.rds")
+temp_input <- readRDS("data/processed/input_mean.rds")
 
 cascades <- temp_input %>% 
   filter(NAME_1=="Cascades")
+cascades <- remove_post_2018_interventions(cascades)
 
 # assume from 2014 onwards that netes are olyset
 int <- cascades$interventions[[1]] %>% 
