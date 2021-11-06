@@ -174,7 +174,7 @@ fit_all_m <- function(resistance_off, temp_mean, temp_lower, temp_upper,
     } else {
       temp_input <- temp_upper
     }
-    for(i in 1:1) {
+    for(i in seq_along(temp_input$NAME_1)) {
       temp <- temp_input[i, ]
       
       # remove all interventions > 2018
@@ -183,12 +183,13 @@ fit_all_m <- function(resistance_off, temp_mean, temp_lower, temp_upper,
       if(resistance_off) {
         res <- temp$resistance[[1]]
         res$resistance <- 0
-        temp$resistance[[i]] <- res
+        temp$resistance[[1]] <- res
       }
       
       print(temp$NAME_1)
       test <- f_find_m(temp$NAME_1, annual, temp, num_people)
       m_results[k, ] <- c(temp$NAME_1, itn_level[j], test$m, -test$log_likelihood_negative)
+      k <- k + 1
     }
   }
   colnames(m_results) <- c("NAME_1", "itn_scenario", "m", "log_likelihood")
