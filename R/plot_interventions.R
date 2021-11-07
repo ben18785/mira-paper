@@ -1,7 +1,6 @@
 library(tidyverse)
-library(purrr)
 
-inputs <- readRDS("data/processed/input_bf_only.rds")
+inputs <- readRDS("data/processed/input_mean.rds")
 interventions <- inputs %>% 
   select(NAME_1, interventions) %>% 
   unnest(cols = c(interventions))

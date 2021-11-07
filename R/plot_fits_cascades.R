@@ -25,14 +25,19 @@ annual1 <- readRDS("data/raw/prevalence_olyset_mira.rds") %>%
 annual <- annual %>% 
   bind_rows(annual1)
 
-temp_input <- readRDS("data/processed/input_bf_only.rds")
+temp_input <- readRDS("data/processed/input_mean.rds")
 m_fits <- readRDS("data/processed/m_fits_all.rds")
+
+# plot only mean scenario
 m <- m_fits %>% 
   filter(NAME_1=="Cascades") %>% 
+  filter(itn_scenario=="mean") %>% 
   pull(m)
+
 cascades <- temp_input %>%
   filter(NAME_1=="Cascades") %>%
   mutate(total_M=m)
+cascades <- remove_post_2018_interventions(cascades)
 temp <- purrr::pmap(cascades, f_run_model)
 outputs <- temp[[1]]$output
 

@@ -1,8 +1,8 @@
 .PHONY: all
 
-ADMINS := $(shell seq 1 13)
+ADMINS := $(shell seq 1 39)
 FIGURE_FITS := $(addsuffix .pdf, $(addprefix outputs/fit_plots/fit_res_on_, $(ADMINS)))
-COUNTERFACTUAL_IDS := $(shell seq 1 104)
+COUNTERFACTUAL_IDS := $(shell seq 1 312)
 COUNTERFACTUAL_RUNS := $(addsuffix .rds, $(addprefix outputs/simulations/counterfactual_, $(COUNTERFACTUAL_IDS)))
 PROJECTION_IDS := $(shell seq 1 130)
 PROJECTION_RUNS := $(addsuffix .rds, $(addprefix outputs/simulations/projection_, $(PROJECTION_IDS)))
@@ -82,14 +82,16 @@ data/processed/m_fits_all.rds: R/fit_m_combine.R\
 # note $< gives first prerequisite; $* allows access to %; $@ allows access to target
 $(FIGURE_FITS): outputs/fit_plots/fit_res_on_%.pdf: R/plot_fits_non_cascades.R\
 	data/raw/monthly_prevalence.rds\
-	data/processed/input_bf_only.rds\
+	data/processed/input_mean.rds\
+	data/processed/input_lower.rds\
+	data/processed/input_upper.rds\
 	data/processed/m_fits_on.rds
 	Rscript $< $* -o $@
 	
 outputs/fit_plots/fit_res_on_cascades_inc_olyset.pdf: R/plot_fits_cascades.R\
 	data/raw/monthly_prevalence.rds\
 	data/raw/prevalence_olyset_mira.rds\
-	data/processed/input_bf_only.rds\
+	data/processed/input_mean.rds\
 	data/processed/m_fits_all.rds
 	Rscript $<
 
@@ -100,7 +102,12 @@ data/processed/counterfactual_params.rds: R/counterfactual_parameter_sets.R\
 	data/processed/input_bf_only.rds
 	Rscript $<
 
-$(COUNTERFACTUAL_RUNS): outputs/simulations/counterfactual_%.rds: R/counterfactual.R
+$(COUNTERFACTUAL_RUNS): outputs/simulations/counterfactual_%.rds: R/counterfactual.R\
+	data/processed/counterfactual_params.rds\
+	data/raw/monthly_prevalence.rds\
+	data/processed/input_mean.rds\
+	data/processed/input_lower.rds\
+	data/processed/input_upper.rds
 	Rscript $< $*
 
 outputs/simulations/counterfactual_all_simulations.rds: R/counterfactual_simulations_process.R\
@@ -110,9 +117,12 @@ outputs/simulations/counterfactual_all_simulations.rds: R/counterfactual_simulat
 outputs/counterfactual_plots/scenarios.pdf: R/plot_counterfactuals.R\
 	outputs/simulations/counterfactual_all_simulations.rds
 	Rscript $<
+	
+outputs/counterfactual_plots/scenarios_lower.pdf: outputs/counterfactual_plots/scenarios.pdf
+outputs/counterfactual_plots/scenarios_upper.pdf: outputs/counterfactual_plots/scenarios.pdf
 
 outputs/counterfactual_plots/interventions.pdf: R/plot_interventions.R\
-	data/processed/input_bf_only.rds
+	data/processed/input_mean.rds
 	Rscript $<
 	
 data/processed/intervention_coverages_whole_burkina.rds: outputs/counterfactual_plots/interventions.pdf

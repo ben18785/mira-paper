@@ -19,11 +19,19 @@ biting_scenario <- counterfactual_params$biting
 resistance_scenario <- counterfactual_params$resistance
 act_scenario <- counterfactual_params$act
 a_NAME_1 <- counterfactual_params$NAME_1
+itn_coverage <- counterfactual_params$itn_coverage
 
 annual <- readRDS("data/raw/monthly_prevalence.rds") %>%
   filter(year >= 2000)
-temp_input <- readRDS("data/processed/input_bf_only.rds")
-m_fits <- readRDS("data/processed/m_fits_all.rds")
+if(itn_coverage=="mean") {
+  temp_input <- readRDS("data/processed/input_mean.rds")
+}else if(itn_coverage=="lower") {
+  temp_input <- readRDS("data/processed/input_lower.rds")
+} else if(itn_coverage=="upper"){
+  temp_input <- readRDS("data/processed/input_upper.rds")
+}
+m_fits <- readRDS("data/processed/m_fits_all.rds") %>% 
+  filter(itn_scenario==itn_coverage)
 
 # select base data
 a_df <- temp_input %>%
@@ -31,17 +39,11 @@ a_df <- temp_input %>%
   mutate(total_M=m_fits$m[match(a_NAME_1, temp_input$NAME_1)])
 
 # go through scenarios and modify data
+## remove post-2020 obs
 a <- a_df$interventions[[1]]
-## as base case (before modified below) keep interventions the same
-laster <- a %>%
-  filter(year==2018)
-last_1 <- laster %>% mutate(year=2019)
-last_2 <- laster %>% mutate(year=2020)
-
-a <- a %>%
-  bind_rows(last_1) %>%
-  bind_rows(last_2)
-
+a <- a %>% 
+  filter(year <= 2020)
+  
 # itn scenarios
 if(itn_scenario == 0) {
   ## no ITN coverage

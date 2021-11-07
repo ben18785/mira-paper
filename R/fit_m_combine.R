@@ -13,12 +13,6 @@ source("R/helper.R")
 # overall fits
 m_results_on <- readRDS("data/processed/m_fits_on.rds")
 
-m_1 <- m_results_on %>% 
-  filter(NAME_1=="Cascades") %>% 
-  pull(m) %>% 
-  as.character(as.numeric())
-m_1 <- as.numeric(m_1)
-
 # cascade fits
 olyset <- readRDS("data/processed/m_fits_cascades_olyset.rds")
 m_2 <- olyset$m
@@ -45,7 +39,8 @@ size_other <- readRDS("data/raw/monthly_prevalence.rds") %>%
   sum()
 
 ## take weighted average of ms
-m_both <- (size_olyset * m_2 + size_other * m_1) / (size_olyset + size_other)
 m_results_on <- m_results_on %>% 
-  mutate(m = if_else(NAME_1=="Cascades", m_both, as.numeric(as.character(m))))
+  mutate(m=as.numeric(as.character(m))) %>% 
+  mutate(m = if_else(NAME_1=="Cascades", (size_olyset * m_2 + size_other * m) / (size_olyset + size_other),
+                     as.numeric(as.character(m))))
 saveRDS(m_results_on, "data/processed/m_fits_all.rds")
