@@ -4,7 +4,7 @@ ADMINS := $(shell seq 1 39)
 FIGURE_FITS := $(addsuffix .pdf, $(addprefix outputs/fit_plots/fit_res_on_, $(ADMINS)))
 COUNTERFACTUAL_IDS := $(shell seq 1 312)
 COUNTERFACTUAL_RUNS := $(addsuffix .rds, $(addprefix outputs/simulations/counterfactual_, $(COUNTERFACTUAL_IDS)))
-PROJECTION_IDS := $(shell seq 1 130)
+PROJECTION_IDS := $(shell seq 1 390)
 PROJECTION_RUNS := $(addsuffix .rds, $(addprefix outputs/simulations/projection_, $(PROJECTION_IDS)))
 # $(info VAR="$(COUNTERFACTUAL)")
 
@@ -99,7 +99,7 @@ data/processed/cascades_fit_prevalence_1.rds: outputs/fit_plots/fit_res_on_casca
 data/processed/cascades_fit_prevalence_2.rds: outputs/fit_plots/fit_res_on_cascades_inc_olyset.pdf
 	
 data/processed/counterfactual_params.rds: R/counterfactual_parameter_sets.R\
-	data/processed/input_bf_only.rds
+	data/processed/input_mean.rds
 	Rscript $<
 
 $(COUNTERFACTUAL_RUNS): outputs/simulations/counterfactual_%.rds: R/counterfactual.R\
@@ -145,7 +145,7 @@ outputs/counterfactual_plots/age_prevalence_cascades.pdf: R/plot_age_dependent_p
 outputs/data/processed/cascades_actual_fitted_age_prevalence.rds: outputs/counterfactual_plots/age_prevalence_cascades.pdf
 
 data/processed/projection_params.rds: R/projection_parameter_sets.R\
-	data/processed/input_bf_only.rds
+	data/processed/input_mean.rds
 	Rscript $<
 
 $(PROJECTION_RUNS): outputs/simulations/projection_%.rds: R/projection.R\

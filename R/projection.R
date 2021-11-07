@@ -16,11 +16,19 @@ itn_type_scenario <- params_df$itn_type
 smc_scenario <- params_df$smc
 irs_scenario <- params_df$irs
 resistance_scenario <- params_df$resistance
+itn_coverage_past <- params_df$itn_coverage_past
 
 annual <- readRDS("data/raw/monthly_prevalence.rds") %>%
   filter(year >= 2000)
-temp_input <- readRDS("data/processed/input_bf_only.rds")
-m_fits <- readRDS("data/processed/m_fits_all.rds")
+m_fits <- readRDS("data/processed/m_fits_all.rds") %>% 
+  filter(itn_scenario==itn_coverage_past)
+if(itn_coverage_past=="mean") {
+  temp_input <- readRDS("data/processed/input_mean.rds")
+}else if(itn_coverage_past=="lower") {
+  temp_input <- readRDS("data/processed/input_lower.rds")
+} else if(itn_coverage_past=="upper"){
+  temp_input <- readRDS("data/processed/input_upper.rds")
+}
 
 # select base data
 a_NAME_1 <- params_df$NAME_1
@@ -30,24 +38,6 @@ a_df <- temp_input %>%
 
 # go through scenarios and modify data
 a <- a_df$interventions[[1]]
-## as base case (before modified below) keep interventions the same
-laster <- a %>%
-  filter(year==2018)
-last_1 <- laster %>% mutate(year=2019)
-last_2 <- laster %>% mutate(year=2020)
-last_3 <- laster %>% mutate(year=2021)
-last_4 <- laster %>% mutate(year=2022)
-last_5 <- laster %>% mutate(year=2023)
-last_6 <- laster %>% mutate(year=2024)
-last_7 <- laster %>% mutate(year=2025)
-a <- a %>%
-  bind_rows(last_1) %>%
-  bind_rows(last_2) %>%
-  bind_rows(last_3) %>%
-  bind_rows(last_4) %>%
-  bind_rows(last_5) %>%
-  bind_rows(last_6) %>%
-  bind_rows(last_7)
 
 # itn coverage scenarios
 if(itn_coverage_scenario == 0) {

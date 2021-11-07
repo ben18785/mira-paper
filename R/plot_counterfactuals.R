@@ -9,7 +9,8 @@ g <- df %>%
   facet_wrap(~NAME_1) +
   scale_color_brewer("Scenario", palette = "Dark2") +
   xlab("Year") +
-  scale_y_continuous(labels=scales::percent_format(accuracy = 1))
+  scale_y_continuous(labels=scales::percent_format(accuracy = 1),
+                     limits = c(0, 0.5))
 ggsave("outputs/counterfactual_plots/scenarios.pdf", g,
        width = 12, height = 8)
 
@@ -21,7 +22,8 @@ g <- df %>%
   facet_wrap(~NAME_1) +
   scale_color_brewer("Scenario", palette = "Dark2") +
   xlab("Year") +
-  scale_y_continuous(labels=scales::percent_format(accuracy = 1))
+  scale_y_continuous(labels=scales::percent_format(accuracy = 1),
+                     limits = c(0, 0.5))
 ggsave("outputs/counterfactual_plots/scenarios_lower.pdf", g,
        width = 12, height = 8)
 
@@ -33,6 +35,7 @@ g <- df %>%
   facet_wrap(~NAME_1) +
   scale_color_brewer("Scenario", palette = "Dark2") +
   xlab("Year") +
-  scale_y_continuous(labels=scales::percent_format(accuracy = 1))
+  scale_y_continuous(labels=scales::percent_format(accuracy = 1),
+                     limits = c(0, 0.5))
 ggsave("outputs/counterfactual_plots/scenarios_upper.pdf", g,
        width = 12, height = 8)

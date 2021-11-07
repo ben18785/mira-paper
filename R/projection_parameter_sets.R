@@ -12,9 +12,12 @@ parameters_df <- tribble(
   "universal perfect LLINs", 2, 0, 1, 0, 1,
   "universal perfect LLINs + IRS", 2, 0, 1, 1, 1)
 
-temp_input <- readRDS("data/processed/input_bf_only.rds") %>% 
+temp_input <- readRDS("data/processed/input_mean.rds") %>% 
   select(NAME_0, NAME_1)
 parameters_df <- expand_grid(temp_input,
                              parameters_df)
+itn_coverages <- tibble(itn_coverage_past=c("mean", "lower", "upper"))
+parameters_df <- expand_grid(parameters_df,
+                             itn_coverages)
 
 saveRDS(parameters_df, "data/processed/projection_params.rds")
