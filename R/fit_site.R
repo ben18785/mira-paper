@@ -225,7 +225,7 @@ f_run_model_longer <- function(total_M, Continent, ISO, NAME_0, NAME_1, NAME_2, 
                                                   resistance$resistance[1:31],
                                                   interventions$irs_compound)
 
-  options = paste(paste0("num_people ", num_people, " final_run 26 itn_usage 1 num_runs ", num_runs), "add", itn, irs, smc, tx, rtss,
+  options = paste(paste0("num_people ", num_people, " final_run 31 itn_usage 1 num_runs ", num_runs), "add", itn, irs, smc, tx, rtss,
                   mlgts::bionomics_string(vectors), lparam, iparam)
 
   site <- mlgts::site_create(vectors, seasonality)

@@ -43,16 +43,16 @@ a <- a_df$interventions[[1]]
 if(itn_coverage_scenario == 0) {
   ## no ITN coverage into the future
   a <- a %>%
-    mutate(llin=if_else(year >= 2020, 0.00000001, llin)) # trying a small number to avoid issues with seed
+    mutate(llin=if_else(year >= 2019, 0.00000001, llin)) # trying a small number to avoid issues with seed
 } else if(itn_coverage_scenario == 2) { # scenario 1 is default
   a <- a %>%
-    mutate(llin=if_else(year >= 2020, 0.8, llin))
+    mutate(llin=if_else(year >= 2019, 0.8, llin))
 }
 
 # itn type scenarios
 if(itn_type_scenario == 1) {
   a <- a %>%
-    mutate(net_type=if_else(year >= 2020, "pbo", net_type))
+    mutate(net_type=if_else(year >= 2019, "pbo", net_type))
 }
 
 # smc scenarios
@@ -62,13 +62,13 @@ a <- a %>%
 if (smc_scenario == 0) {
   ## turn smc off in future
   a <- a %>%
-    mutate(smc = if_else(year >= 2020, 0, smc))
+    mutate(smc = if_else(year >= 2019, 0, smc))
 }
 
 # irs scenarios
 if (irs_scenario == 1) {
   a <- a %>%
-    mutate(irs = if_else(year >= 2020, 0.8, irs))
+    mutate(irs = if_else(year >= 2019, 0.8, irs))
 }
 
 a_df <- a_df %>%
@@ -79,7 +79,7 @@ res <- a_df$resistance[[1]]
 if(resistance_scenario == 1) {
   ## turn resistance off in 2019 onwards
   res <- res %>%
-    mutate(resistance=if_else(year >= 2020, 0, resistance))
+    mutate(resistance=if_else(year >= 2019, 0, resistance))
 }
 a_df <- a_df %>%
   mutate(resistance = list(res)) %>%
@@ -96,4 +96,3 @@ final_df <- list(outputs=outputs,
                  inputs=inputs,
                  big_input=a_df)
 saveRDS(final_df, filename)
-

@@ -24,6 +24,8 @@ all: data/processed/m_fits_all.rds\
 		 $(PROJECTION_RUNS)\
 		 outputs/simulations/projection_all_simulations.rds\
 		 outputs/projection_plots/scenarios.pdf\
+		 outputs/projection_plots/scenarios_upper.pdf\
+		 outputs/projection_plots/scenarios_lower.pdf\
 		 outputs/counterfactual_plots/age_prevalence_cascades.pdf\
 		 outputs/data/processed/cascades_actual_fitted_age_prevalence.rds\
 		 outputs/counterfactual_plots/map_vs_old_itn.pdf\
@@ -159,3 +161,6 @@ outputs/simulations/projection_all_simulations.rds: R/projection_simulations_pro
 outputs/projection_plots/scenarios.pdf: R/plot_projections.R\
 	outputs/simulations/projection_all_simulations.rds
 	Rscript $<
+
+outputs/projection_plots/scenarios_lower.pdf: outputs/projection_plots/scenarios.pdf
+outputs/projection_plots/scenarios_upper.pdf: outputs/projection_plots/scenarios.pdf
