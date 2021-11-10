@@ -30,7 +30,8 @@ all: data/processed/m_fits_all.rds\
 		 outputs/data/processed/cascades_actual_fitted_age_prevalence.rds\
 		 outputs/counterfactual_plots/map_vs_old_itn.pdf\
 		 data/processed/input_upper.rds\
-		 outputs/simulations/counterfactual_cases_absolute_mira.rds
+		 outputs/simulations/counterfactual_cases_absolute_mira.rds\
+		 data/processed/projection_cases_adjusted.rds
 
 data/processed/input_bf_only.rds: R/clean_and_produce_BF_data.R\
 	data/raw/input.RData\
@@ -166,12 +167,16 @@ outputs/projection_plots/scenarios.pdf: R/plot_projections.R\
 outputs/projection_plots/scenarios_lower.pdf: outputs/projection_plots/scenarios.pdf
 outputs/projection_plots/scenarios_upper.pdf: outputs/projection_plots/scenarios.pdf
 
-outputs/counterfactual_plots/cases_absolute_mira.pdf: R/counterfactual_cases.R\
+outputs/counterfactual_plots/cases_absolute_mira.pdf: R/counterfactual_match_incidence.R\
 	outputs/simulations/counterfactual_all_simulations.rds\
 	data/raw/population_projections.RData\
 	data/raw/Incidence\ by\ village\ for\ Tom_030921.csv
 	Rscript $<
 
+data/processed/counterfactual_cases.rds: outputs/counterfactual_plots/cases_absolute_mira.pdf
 outputs/counterfactual_plots/cases_percentage_mira.pdf: outputs/counterfactual_plots/cases_absolute_mira.pdf
 outputs/counterfactual_plots/cases_admin1_percentage_mira.pdf: outputs/counterfactual_plots/cases_percentage_mira.pdf
 outputs/simulations/counterfactual_cases_absolute_mira.rds: outputs/counterfactual_plots/cases_percentage_mira.pdf
+
+data/processed/projection_cases_adjusted.rds: R/projection_cases_match.R
+	Rscript $<

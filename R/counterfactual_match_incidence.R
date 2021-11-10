@@ -17,7 +17,7 @@ population_projections <- population_projections %>%
 year_df <- df %>% 
   mutate(year_round=round(year)) %>% 
   left_join(population_projections, by=c("NAME_1", "year_round")) %>% 
-  group_by(NAME_1, year_round, scenario) %>% 
+  group_by(NAME_1, year_round, scenario, itn_coverage) %>% 
   summarise(
     cases=mean(clin_inc_all_smooth * par),
     clin_inc_all_smooth=weighted.mean(clin_inc_all_smooth, par),
@@ -34,16 +34,20 @@ incidence_2017 <- weighted.mean(df_mira$incidence, df_mira$sample_size)
 # inflate / deflate incidence (and cases)
 modelled_incidence_2017 <- year_df %>%
   filter(scenario=="current") %>% 
-  group_by(year_round) %>% 
+  group_by(year_round, itn_coverage) %>% 
   summarise(clin_inc_5_15_smooth=mean(clin_inc_5_15_smooth)) %>% 
   filter(year_round==2017) %>% 
-  pull(clin_inc_5_15_smooth)
-ratio <- incidence_2017 / modelled_incidence_2017
+  mutate(ratio=incidence_2017 / clin_inc_5_15_smooth) %>% 
+  select(-clin_inc_5_15_smooth) %>% 
+  ungroup() %>% 
+  select(-year_round)
 
 year_df <- year_df %>% 
+  left_join(modelled_incidence_2017) %>% 
   mutate(cases = cases * ratio) %>% 
   mutate(clin_inc_all_smooth=clin_inc_all_smooth * ratio) %>% 
   mutate(clin_inc_5_15_smooth=clin_inc_5_15_smooth * ratio)
+saveRDS(year_df, "data/processed/counterfactual_cases.rds")
 
 # work out differences versus current and plot
 percent_df <- year_df %>% 
